@@ -2,7 +2,7 @@
 
 lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'resumer/version'
+require 'resumer/info'
 
 Gem::Specification.new do |spec|
   spec.name          = 'resumer'
@@ -38,8 +38,10 @@ Gem::Specification.new do |spec|
       .reject { |f| f.match(%r{^(test|spec|features)/}) }
   end
   spec.bindir        = 'bin'
-  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  spec.executables   = ['resumer']
   spec.require_paths = ['lib']
+
+  spec.add_dependency 'commander', '~> 4.5'
 
   spec.add_development_dependency 'bundler', '~> 1.17'
   spec.add_development_dependency 'rake', '~> 10.0'

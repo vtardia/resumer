@@ -2,9 +2,9 @@
 
 require 'bundler/gem_tasks'
 require 'rspec/core/rake_task'
-require './lib/resumer/version'
+require './lib/resumer/info'
 
-GEM_NAME = 'resumer'
+GEM_NAME = Resumer::BIN
 GEM_VERSION = Resumer::VERSION
 
 RSpec::Core::RakeTask.new(:spec)
@@ -24,5 +24,5 @@ task publish: :build do
 end
 
 task :clean do
-  system 'rm *.gem'
+  system 'rm -rf pkg && rm *.gem'
 end
