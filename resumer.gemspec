@@ -7,13 +7,16 @@ require 'resumer/info'
 Gem::Specification.new do |spec|
   spec.name          = 'resumer'
   spec.version       = Resumer::VERSION
+  spec.summary       = 'Resumer creates beautiful CVs from YAML files'
+  spec.description   = <<~DESC
+    Write your resume once in machine-readable YAML format and export it
+    to HTML or PDF using custom themes.
+  DESC
   spec.authors       = ['Vito Tardia']
-  spec.email         = ['vito@tardia.me']
 
-  spec.summary       = 'YAML Resume parser'
-  spec.description   = 'Beautifully formatted CVs from YAML files.'
-  spec.homepage      = 'https://github.com/vtardia/resumer'
   spec.license       = 'MIT'
+  spec.email         = ['vito@tardia.me']
+  spec.homepage      = 'https://github.com/vtardia/resumer'
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set
   # the 'allowed_push_host' to allow pushing to a single host or
@@ -30,18 +33,25 @@ Gem::Specification.new do |spec|
   end
 
   # Specify which files should be added to the gem when it is released.
-  # The `git ls-files -z` loads the files in the RubyGem that have been
-  # added into git.
-  spec.files = Dir.chdir(File.expand_path(__dir__)) do
-    `git ls-files -z`
-      .split("\x0")
-      .reject { |f| f.match(%r{^(test|spec|features)/}) }
-  end
+  spec.files = Dir['lib/**/*']
+  spec.require_paths = ['lib']
   spec.bindir        = 'bin'
   spec.executables   = ['resumer']
-  spec.require_paths = ['lib']
+
+  spec.extra_rdoc_files = Dir['README.md', 'CHANGELOG.md', 'LICENSE.txt']
+  spec.rdoc_options += [
+    '--title', 'Resumer - beautiful CVs from YAML files',
+    '--main', 'README.md',
+    '--line-numbers',
+    '--inline-source',
+    '--quiet'
+  ]
+
+  spec.required_ruby_version = '>= 2.6.0'
 
   spec.add_dependency 'commander', '~> 4.5'
+  spec.add_dependency 'kramdown', '~> 2.1'
+  spec.add_dependency 'pdfkit', '~> 0.8'
 
   spec.add_development_dependency 'bundler', '~> 1.17'
   spec.add_development_dependency 'rake', '~> 10.0'
