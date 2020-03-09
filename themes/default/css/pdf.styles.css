@@ -1,0 +1,27 @@
+/* csslint ignore:start */
+header {
+    display: -webkit-box;
+
+    -webkit-box-pack: justify;
+}
+
+header .contact {
+    -webkit-box-flex: 1;
+}
+
+main {
+    display: -webkit-box;
+    -webkit-box-pack: justify;
+    -webkit-box-align: stretch;
+}
+
+aside {
+    display: -webkit-box;
+    -webkit-box-flex: 1;
+    -webkit-box-orient: vertical;
+}
+
+aside section {
+    -webkit-box-flex: 1;
+}
+/* csslint ignore:end */

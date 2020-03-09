@@ -1,0 +1,83 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title><%=data.basics.name%> | Resume</title>
+  <% if style then %><style><%="#{style}"%></style><% end %>
+
+</head>
+
+<body>
+  <div class="page">
+  <!-- Page Header: Curriculum Vitae -->
+  <header role="banner">
+    <h1 class="author-name"><%=data.basics.name%></h1>
+
+    <!-- Contact box -->
+    <div class="contact h-card">
+      <ul>
+        <li><strong>w</strong>: <span class="p-name u-url"><%=data.basics.website%></span></li>
+        <li><strong>@</strong>: <span class="u-email"><%=data.basics.email%></span></li>
+        <li><strong>m</strong>: <span class="u-phone"><%=data.basics.phone%></span></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <section id="experience" class="experience">
+      <h1 class="headline">Professional Experience</h1>
+      <dl>
+        <%data.basics.work.each do |w| %>
+        <dt class="position"><%=(w.position) ? w.position + " /": "" %> <%=w.company%></dt>
+        <dt class="dates"><%=w.startDate%> - <%=w.endDate || "present"%></dt>
+        <dd><%=markdown(w.summary)%></dd>
+        <%end%>
+      </dl>
+    </section>
+
+    <aside>
+      <% if data.skills.count > 0 %>
+      <section id="skills" class="skills">
+        <h1 class="headline">Skills</h1>
+        <ul>
+          <% data.skills.each do |s| %>
+          <li><%=markdown(s.name)%></li>
+          <% end %>
+        </ul>
+      </section>
+      <% end %>
+
+      <% if data.education.count > 0 %>
+      <section id="education" class="education">
+        <h1 class="headline">Education</h1>
+        <ul>
+          <% data.education.each do |e| %>
+          <li>
+            <strong><%=e.institution%></strong><br/>
+            <%=e.area || e.studyType || ""%> <%=e.startDate || ""%> <%=e.endDate || ""%>
+          </li>
+          <% end %>
+        </ul>
+      </section>
+      <% end %>
+      </aside>
+  </main>
+
+  <% if data.basics.profiles.count > 0 %>
+  <section id="profiles" class="profiles">
+    <ul>
+      <% data.basics.profiles.each do |p| %>
+      <li><%=p.network%> <a href="<%=p.url%>"><%=p.url%></a></li>
+      <% end %>
+    </ul>
+  </section>
+  <% end %>
+
+  <footer>
+    <p><small class="license">This document is licensed using a Creative Commons Attribution-Noncommercial-No Derivative Works 3.0 Unported License.</small></p>
+  </footer>
+  </div>
+</body>
+</html>
