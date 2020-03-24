@@ -20,12 +20,29 @@ module Resumer
       program :help, *Resumer::AUTHOR
     end
 
+    # rubocop:disable Metrics/MethodLength
+    def add_export_command
+      command :export do |c|
+        c.option '-c', '--config FILE', 'Load a custom configuration file'
+        c.option '--format STRING', 'Destination format (HTML or PDF)'
+        c.summary = 'Export a YAML resume to HTML or PDF format'
+        c.syntax = "#{Resumer::BIN} export <source.yml> [destination.html|.pdf]"
+        c.action do |args, options|
+          Resumer::Command::Export.new(args, options).run
+        rescue StandardError => e
+          say "Error (#{e.class.name}): #{e.message}"
+          exit 1
+        end
+      end
+    end
+    # rubocop:enable Metrics/MethodLength
+
     def run
       default_command :usage
       add_command(Resumer::Command::Usage.new)
       add_command(Resumer::Command::Init.new)
       add_command(Resumer::Command::Validate.new)
-      add_command(Resumer::Command::Export.new)
+      add_export_command
       run!
     end
   end

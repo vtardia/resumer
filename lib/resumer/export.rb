@@ -8,7 +8,19 @@ require 'kramdown'
 module Resumer
   # Export a YAML CV to an HTML or PDF file
   class Export
+    attr_reader :defaults
     attr_reader :formats
+
+    def initialize
+      @formats = %i[html pdf]
+      @defaults = {
+        format: @formats.first,
+        theme: File.expand_path(
+          "#{File.dirname(__FILE__)}/../../themes/default"
+        ),
+        pdf: pdf_defaults
+      }
+    end
 
     def pdf_defaults
       {
@@ -21,32 +33,8 @@ module Resumer
       }
     end
 
-    def initialize(_config = {})
-      @formats = %i[html pdf]
-      @defaults = {
-        format: @formats.first,
-        theme: File.expand_path(
-          "#{File.dirname(__FILE__)}/../../themes/default"
-        ),
-        pdf: pdf_defaults
-      }
-    end
-
     def default_format
       @defaults[:format]
-    end
-
-    def load(file)
-      YAML.safe_load(File.read(file))
-    rescue e
-      raise Error, "Failed to read #{file}: #{e.message}"
-    end
-
-    def load_resume(file)
-      data = load(file)
-      raise Error, 'Invalid or empty source data' if data.nil?
-
-      data
     end
 
     # Transform the YAML object in an OpenStruct with symbol keys
@@ -79,14 +67,14 @@ module Resumer
       Kramdown::Document.new(text).to_html
     end
 
-    def create_html(data, with_style = false)
+    def create_html(data, theme = @defaults[:theme], with_style = false)
       # Load the theme
       erb = ERB.new(
-        File.read(File.absolute_path("#{@defaults[:theme]}/index.html"))
+        File.read(File.absolute_path("#{theme}/index.html"))
       )
       if with_style
         style = File.read(
-          File.absolute_path("#{@defaults[:theme]}/css/styles.css")
+          File.absolute_path("#{theme}/css/styles.css")
         )
       end
       data = normalize(data)
@@ -100,42 +88,35 @@ module Resumer
       end
     end
 
-    def save_pdf(html, dest)
+    def save_pdf(html, dest, theme = @defaults[:theme])
       pdf_config
       kit = PDFKit.new(html)
 
       # Load generic styles
-      kit.stylesheets << "#{@defaults[:theme]}/css/styles.css"
+      kit.stylesheets << "#{theme}/css/styles.css"
 
       # Load PDF-specific styles
-      pdfstyles = "#{@defaults[:theme]}/css/pdf.styles.css"
+      pdfstyles = "#{theme}/css/pdf.styles.css"
       kit.stylesheets << pdfstyles if File.exist? pdfstyles
 
       # Compile and save
       kit.to_file(dest)
     end
 
-    #   Ensure PDF converter is intalled if selected
-    #   Throw error if dest file exists and override=false
-    def run(src, dest, format = :html, override = false)
-      # Ensure source file is valid YAML/CV
-      data = load_resume(src)
+    def run(data, dest, settings = @defaults)
+      raise Error, 'Invalid or empty source data' if data.nil?
 
-      # Ensure destination format is supported
-      unless @formats.include? format
-        raise Error, "Format '#{format.to_s.upcase}' is not supported"
-      end
-
-      say(
-        "Exporting #{src} to #{dest} in #{format} format " \
-        "(override: #{override})"
-      )
-
+      html = create_html(data, settings[:theme], (settings[:format] == :html))
+      case settings[:format]
       # Process HTML export
-      return save_html(create_html(data, true), dest) if format == :html
-
+      when :html
+        save_html(html, dest)
       # Process PDF export
-      return save_pdf(create_html(data), dest) if format == :pdf
+      when :pdf
+        save_pdf(html, dest, settings[:theme])
+      else
+        raise Error, "Invalid format #{settings[:format].to_s.upcase}"
+      end
     end
 
     private
