@@ -1,0 +1,86 @@
+---
+basics:
+  name: Joe Bloggs
+  label: coder / nerd
+  picture: ''
+  email: me@example.com
+  phone: "+44 (0) 1234 567890"
+  website: http://mywebsite.com
+
+  summary: "I'm Joe. Lorem ipsum **dolor sit amet**, consectetur adipisicing elit,
+    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    Ut enim ad minim veniam, quis nostrud _exercitation ullamco_ laboris nisi ut
+    aliquip ex ea commodo consequat."
+
+  profiles:
+
+    - network: Your GitHub
+      username: jbloggs
+      url: https://github.com/jbloggs
+
+    - network: You on LinkedIn
+      username: joe
+      url: https://linkedin.com/in/joe
+
+    #...other profiles
+
+  work:
+
+    - company: Great Company 1, London - UK
+      position: Frontend Engineer
+      startDate: august 2019
+      summary: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+      eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+      aliquip ex ea commodo consequat."
+
+    - company: Great Company 2, NYC - US
+      position: Great Well paid role
+      startDate: february 2017
+      endDate: august 2019
+      summary: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+      eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+      aliquip ex ea commodo consequat."
+
+    - company: <Company>, <City> - <Country>
+      position: <Role>
+      website: http://somesite.com
+      startDate: <Month Year>
+      endDate: <Month Year>
+      summary: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+      eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+      aliquip ex ea commodo consequat."
+
+education:
+
+  - institution: <School One>, <City> - Country
+    area: <Topic or degree>
+    startDate: <Month Year>
+    endDate: <Month Year>
+
+  - institution: <School Two or Great Mentor>
+    studyType: <Freeform description of the experience>
+    startDate: <Month Year>
+    endDate: <Month Year>
+
+    # more education here
+
+skills:
+
+  - name: "**Website design**, with standard compliant **HTML/CSS**"
+    keywords:
+    - HTML
+    - CSS
+    - Javascript
+
+  - name: "**User experience** (UX) and product design"
+    keywords:
+    - UI
+    - UX
+
+  - name: "**Email marketing** services and consulting"

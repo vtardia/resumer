@@ -33,7 +33,7 @@ Gem::Specification.new do |spec|
   end
 
   # Specify which files should be added to the gem when it is released.
-  spec.files = Dir['lib/**/*'] + Dir['themes/**/*']
+  spec.files = Dir['lib/**/*'] + Dir['themes/**/*'] + Dir['templates/**/*']
   spec.require_paths = ['lib']
   spec.bindir        = 'bin'
   spec.executables   = ['resumer']
