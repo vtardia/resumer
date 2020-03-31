@@ -26,6 +26,12 @@
   </header>
 
   <main>
+    <% if data.basics.summary %>
+    <section id="summary" class="summary">
+      <%=markdown(data.basics.summary)%>
+    </section>
+    <% end %>
+
     <section id="experience" class="experience">
       <h1 class="headline">Professional Experience</h1>
       <dl>

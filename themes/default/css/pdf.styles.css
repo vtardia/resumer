@@ -1,27 +1,34 @@
 /* csslint ignore:start */
 header {
-    display: -webkit-box;
+  display: -webkit-box;
 
-    -webkit-box-pack: justify;
+  -webkit-box-pack: justify;
 }
 
 header .contact {
-    -webkit-box-flex: 1;
+  -webkit-box-flex: 1;
 }
 
 main {
-    display: -webkit-box;
-    -webkit-box-pack: justify;
-    -webkit-box-align: stretch;
+  overflow: hidden;
+}
+
+.experience {
+  float: left;
 }
 
 aside {
-    display: -webkit-box;
-    -webkit-box-flex: 1;
-    -webkit-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-box-flex: 1;
+  -webkit-box-orient: vertical;
+  float: right;
 }
 
 aside section {
-    -webkit-box-flex: 1;
+  -webkit-box-flex: 1;
+}
+
+.profiles {
+  clear: both;
 }
 /* csslint ignore:end */
