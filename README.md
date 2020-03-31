@@ -28,6 +28,14 @@ $ gem install resumer
 
 ## Usage
 
+Create a new YAML resume file:
+
+```console
+$ resumer init [path/to/new/resume.yml]
+```
+
+Edit the YAML file with your data, then export it:
+
 ```console
 $ resumer <sourceFile> [destFile/defaults to sourceFile.pdf/html]
 ```
