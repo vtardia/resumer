@@ -47,13 +47,13 @@ Gem::Specification.new do |spec|
     '--quiet'
   ]
 
-  spec.required_ruby_version = '>= 2.6.0'
+  spec.required_ruby_version = '~> 2.7'
 
-  spec.add_dependency 'commander', '~> 4.5'
-  spec.add_dependency 'kramdown', '~> 2.1'
+  spec.add_dependency 'commander', '~> 4.6'
+  spec.add_dependency 'kramdown', '~> 2.3'
   spec.add_dependency 'pdfkit', '~> 0.8'
 
-  spec.add_development_dependency 'bundler', '~> 1.17'
-  spec.add_development_dependency 'rake', '~> 10.0'
+  spec.add_development_dependency 'bundler', '~> 2.1'
+  spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
 end
