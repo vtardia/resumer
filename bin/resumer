@@ -3,4 +3,4 @@
 # frozen_string_literal: true
 
 require 'resumer'
-puts Resumer::CLI.new.run
+Resumer::CLI.new.run
