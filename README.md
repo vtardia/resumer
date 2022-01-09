@@ -37,7 +37,7 @@ $ resumer init [path/to/new/resume.yml]
 Edit the YAML file with your data, then export it:
 
 ```console
-$ resumer <sourceFile> [destFile/defaults to sourceFile.pdf/html]
+$ resumer export <sourceFile> [destFile/defaults to sourceFile.pdf/html]
 ```
 
 ## Contributing
