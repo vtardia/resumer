@@ -1,0 +1,37 @@
+name: Build
+
+on:
+  # runs on each push...
+  push:
+    # ...for this branches
+    branches:
+      - main
+  # and all pull requests
+  pull_request:
+
+jobs:
+  # build pipeline
+  build:
+    # name of the runner hosted by GitHub
+    runs-on: ubuntu-latest
+    # each job has a name, too. the bits next to "matrix" means
+    # "run one job for each combination of things in the strategy.matrix structure"
+    name: Ruby ${{ matrix.ruby }}
+    strategy:
+      matrix:
+        ruby:
+          # add more ruby versions as needed
+          - '3.2.2'
+    steps:
+      # check out the code first
+      - uses: actions/checkout@v3
+      # install Ruby, since the base runner does not have Ruby
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          # magic sauce for the matrix jobs to substitute the values in the combinations
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+      # run tests
+      - name: Run tests
+        run: bundle exec rake spec
